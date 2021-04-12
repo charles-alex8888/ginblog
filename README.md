@@ -13,6 +13,8 @@ go mod tidy
 > go get gopkg.in/ini.v1
 # gorm包
 > go get -u github.com/jinzhu/gorm
+# mysql驱动
+> _ "github.com/go-sql-driver/mysql"
 
 # 目录框架
 - config
