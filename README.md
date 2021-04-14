@@ -31,3 +31,11 @@ go mod tidy
 
 
 # 前端
+## 
+vue create mgt
+
+## 
+curl -o- -L https://yarnpkg.com/install.sh | bash
+yarn add ant-design-vue --dev
+yarn add axios
+yarn add babel-plugin-import --dev
