@@ -18,7 +18,6 @@ type Article struct {
 
 // 新增文章
 func CreateArticle(data *Article) int {
-	// data.Password = ScrypPw(data.Password)
 	err := db.Create(&data).Error
 	if err != nil {
 		return errmsg.ERROR

@@ -28,7 +28,7 @@ func AddCategory(c *gin.Context) {
 	})
 }
 
-// 查询单个用户
+// 查询分类是否存在
 func GetCategory(c *gin.Context) {
 	var username string
 	_ = c.ShouldBindJSON(username)

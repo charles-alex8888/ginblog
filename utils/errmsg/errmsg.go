@@ -11,6 +11,7 @@ const (
 	ERROR_TOKEN_RUNTIME    = 1005
 	ERROR_TOKEN_WRONG      = 1006
 	ERROR_TOKEN_TYPE_WRONG = 1007
+	ERROR_USER_NO_RIGHT    = 1008
 	// code 以2000.开头==》 文章模块的错误
 	ERROR_CATENAME_USED = 2001
 	// code 以3000.开头==》 分类模块的错误
@@ -27,6 +28,7 @@ var codeMsg = map[int]string{
 	ERROR_TOKEN_WRONG:      "TOKEN不正确",
 	ERROR_TOKEN_TYPE_WRONG: "TOKEN格式不正确",
 	ERROR_CATENAME_USED:    "分类已经存在",
+	ERROR_USER_NO_RIGHT:    "该用户无权限",
 }
 
 func GetErrMsg(code int) string {

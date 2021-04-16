@@ -28,14 +28,26 @@ go mod tidy
 
 # 接口测试工具
 - ApiPost
+## JWT
+> go get -u github.com/dgrijalva/jwt-go
+
+## 日志
+> go get -u github.com/sirupsen/logrus
+## 日志切割
+> go get github.com/lestrrat-go/file-rotatelogs
+go get github.com/rifflock/lfshook
 
 
 # 前端
 ## 
 vue create mgt
 
-## 
+
+## 安装yarn
 curl -o- -L https://yarnpkg.com/install.sh | bash
 yarn add ant-design-vue --dev
 yarn add axios
 yarn add babel-plugin-import --dev
+
+## 启动
+yarn serve

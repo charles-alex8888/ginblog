@@ -21,6 +21,7 @@ func AddArticle(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
+		"data":    data,
 		"message": errmsg.GetErrMsg(code),
 	})
 }
@@ -63,13 +64,14 @@ func EditArticle(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	_ = c.ShouldBindJSON(&data)
 	code = model.EditArticle(id, &data)
+
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
 		"message": errmsg.GetErrMsg(code),
 	})
 }
 
-// 删除分类
+// 删除文章
 func DeleteArticle(c *gin.Context) {
 	//
 	id, _ := strconv.Atoi(c.Param("id"))
