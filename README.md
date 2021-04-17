@@ -37,6 +37,11 @@ go mod tidy
 > go get github.com/lestrrat-go/file-rotatelogs
 go get github.com/rifflock/lfshook
 
+## 验证
+> go get -u "github.com/go-playground/validator/v10"
+
+## 跨域
+> go get -u github.com/gin-contrib/cors
 
 # 前端
 ## 
