@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"ginblog/model"
 	"ginblog/utils/errmsg"
 	"net/http"
@@ -27,16 +26,16 @@ func AddArticle(c *gin.Context) {
 }
 
 // 查询单个文章信息
-func GetArticle(c *gin.Context) {
-	var username string
-	_ = c.ShouldBindJSON(username)
-	data := model.GetUser(username)
-	fmt.Println(data)
-	c.JSON(http.StatusOK, gin.H{
-		"status": code,
-		"data":   data,
-	})
-}
+// func GetArticle(c *gin.Context) {
+// 	var username string
+// 	_ = c.ShouldBindJSON(username)
+// 	data := model.GetUser(username)
+// 	fmt.Println(data)
+// 	c.JSON(http.StatusOK, gin.H{
+// 		"status": code,
+// 		"data":   data,
+// 	})
+// }
 
 // 查询文章列表
 func GetArticles(c *gin.Context) {

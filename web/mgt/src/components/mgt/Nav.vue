@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     goToPage (item) {
-      this.$router.push(item.key)
+      this.$router.push('/mgt/' + item.key).catch((err) => err)
     }
   }
 }

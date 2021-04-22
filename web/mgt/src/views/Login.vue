@@ -52,11 +52,11 @@ export default {
       rules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 6, max: 8, message: 'length should be 6 to 8', trigger: 'blur' },
+          { min: 6, max: 8, message: 'length should be 6 to 8', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 20, message: 'length should be 6 to 20', trigger: 'blur' },
+          { min: 6, max: 20, message: 'length should be 6 to 20', trigger: 'blur' }
         ]
       }
     }
@@ -67,17 +67,16 @@ export default {
     },
     login () {
       this.$refs.loginFormRef.validate(async valid => {
-        if (!valid) return this.$message.error("输入数据非法，请重新输入")
+        if (!valid) return this.$message.error('输入数据非法，请重新输入')
         const { data: res } = await this.$http.post('login', this.formdata)
         if (res.status !== 200) return this.$message.error(res.message)
         window.sessionStorage.setItem('token', res.token)
-        this.$router.push('mgt')
+        this.$router.push('mgt/index')
       })
     }
   }
 }
 </script>
-
 
 <style scoped>
 .container {

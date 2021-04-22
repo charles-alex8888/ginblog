@@ -46,27 +46,32 @@ func AddUser(c *gin.Context) {
 
 // 查询单个用户
 func GetUser(c *gin.Context) {
-	var username string
-	_ = c.ShouldBindJSON(username)
-	data := model.GetUser(username)
-	fmt.Println(data)
+	id, _ := strconv.Atoi(c.Param("id"))
+	data, code := model.GetUser(id)
+
 	c.JSON(http.StatusOK, gin.H{
-		"status": code,
-		"data":   data,
+		"status":  code,
+		"data":    data,
+		"total":   1,
+		"message": errmsg.GetErrMsg(code),
 	})
 }
 
 // 查询用户列表
 func GetUsers(c *gin.Context) {
+
 	pageSize, _ := strconv.Atoi(c.Query("pagesize"))
-	pageNum, _ := strconv.Atoi(c.Query("pageNum"))
+	pageNum, _ := strconv.Atoi(c.Query("pagenum"))
+	username := c.Query("username")
+
 	if pageSize == 0 {
 		pageSize = -1
 	}
 	if pageNum == 0 {
 		pageNum = -1
 	}
-	data, total := model.GetUsers(pageSize, pageNum)
+
+	data, total := model.GetUsers(username, pageSize, pageNum)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
 		"data":    data,
@@ -81,10 +86,8 @@ func EditUser(c *gin.Context) {
 	var data model.User
 	id, _ := strconv.Atoi(c.Param("id"))
 	c.ShouldBindJSON(&data)
-	fmt.Println("username,role", data.Username, data.Role)
 	code = model.CheckUser(data.Username)
 	if code == errmsg.SUCCESS {
-		fmt.Println(data)
 		model.EditUser(id, &data)
 	}
 	if code == errmsg.ERROR_USERNAME_USED {
@@ -100,6 +103,7 @@ func EditUser(c *gin.Context) {
 func DeleteUser(c *gin.Context) {
 	//
 	id, _ := strconv.Atoi(c.Param("id"))
+	fmt.Println("id:", id)
 	code = model.DeleteUser(id)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,

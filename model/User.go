@@ -2,7 +2,6 @@ package model
 
 import (
 	"encoding/base64"
-	"fmt"
 	"ginblog/utils/errmsg"
 	"log"
 
@@ -12,7 +11,7 @@ import (
 
 type User struct {
 	gorm.Model
-	Username string `gorm:"type:varchar(20) not null" json:"username" validate:"required,min=4,max=12" label:"用户名“`
+	Username string `gorm:"type:varchar(20) not null" json:"username" validate:"required,min=4,max=12" label:"用户名"`
 	Password string `gorm:"type:varchar(20) not null" json:"password" validate:"required,min=6,max=20" label:"密码"`
 	Role     int    `gorm:"type:int;DEFAULT:2" json:"Role" validate:"required,gte=2" label:"角色"`
 }
@@ -28,11 +27,13 @@ func CheckUser(name string) (code int) {
 }
 
 // 查询单个用户
-func GetUser(name string) User {
+func GetUser(id int) (User, int) {
 	var user User
-	db.Where("username = ?", name).Find(&user)
-	fmt.Println(user)
-	return user
+	err = db.Where("ID = ?", id).First(&user).Error
+	if err != nil {
+		return user, errmsg.ERROR
+	}
+	return user, errmsg.SUCCESS
 }
 
 // 新增用户
@@ -46,11 +47,17 @@ func CreateUser(data *User) int {
 }
 
 // 查询用户列表
-func GetUsers(pageSize int, pageNum int) ([]User, int) {
+func GetUsers(username string, pageSize int, pageNum int) ([]User, int) {
 	var users []User
 	var total int
-	err = db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&users).Count(&total).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+
+	// db.Model(&user).Count(&total)
+	if username != "" {
+		db.Where("username LIKE ? ", username+"%").Find(&users).Count(&total).Limit(pageSize).Offset((pageNum - 1) * pageSize)
+		return users, total
+	}
+	db.Where("username LIKE ? ", username+"%").Find(&users).Count(&total).Limit(pageSize).Offset((pageNum - 1) * pageSize)
+	if err == gorm.ErrRecordNotFound {
 		return nil, 0
 	}
 	return users, total

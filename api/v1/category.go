@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"ginblog/model"
 	"ginblog/utils/errmsg"
 	"net/http"
@@ -29,16 +28,16 @@ func AddCategory(c *gin.Context) {
 }
 
 // 查询分类是否存在
-func GetCategory(c *gin.Context) {
-	var username string
-	_ = c.ShouldBindJSON(username)
-	data := model.GetUser(username)
-	fmt.Println(data)
-	c.JSON(http.StatusOK, gin.H{
-		"status": code,
-		"data":   data,
-	})
-}
+// func GetCategory(c *gin.Context) {
+// 	var username string
+// 	_ = c.ShouldBindJSON(username)
+// 	data := model.GetUser(username)
+// 	fmt.Println(data)
+// 	c.JSON(http.StatusOK, gin.H{
+// 		"status": code,
+// 		"data":   data,
+// 	})
+// }
 
 // 查询分类列表
 func GetCategorys(c *gin.Context) {
